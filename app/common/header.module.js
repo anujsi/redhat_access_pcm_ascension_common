@@ -24,6 +24,7 @@ import ConstantsService from './services/constantsService'
 import HeaderService from './services/headerService'
 import StrataService from './services/strataService'
 import UdsService from './services/udsService'
+import CacheUtilsService from './services/cacheUtils'
 
 const app = angular.module('RedhatAccess.header', []);
 
@@ -51,5 +52,6 @@ app.service('ConstantsService', ConstantsService);
 app.service('HeaderService', HeaderService);
 app.service('strataService', StrataService);
 app.service('udsService', UdsService);
+app.service('CacheUtilsService', CacheUtilsService);
 
 export default app.name;

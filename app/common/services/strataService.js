@@ -1,7 +1,9 @@
 'use strict';
 
+import localForage from "localforage";
+
 export default class StrataService {
-    constructor($q, gettextCatalog, RHAUtils, CacheFactory, RESOURCE_TYPES) {
+    constructor($q, gettextCatalog, RHAUtils, CacheFactory, RESOURCE_TYPES, CacheUtilsService) {
         'ngInject';
 
         CacheFactory('strataCache', {
@@ -13,6 +15,11 @@ export default class StrataService {
             storageMode: 'sessionStorage'
         });
         var strataCache = CacheFactory.get('strataCache');
+        const PCM_CACHE_STORAGE_NAME = "pcm-lf";
+        const PCMCacheUtils = CacheUtilsService.configureCache(localForage,
+            { name: PCM_CACHE_STORAGE_NAME});
+        console.log(PCMCacheUtils);
+        PCMCacheUtils.set('testinglf', 'keyValue', 'value', null);
         $(window).on('unload', function () {
             strataCache.destroy();
         });
