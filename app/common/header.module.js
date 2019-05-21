@@ -17,6 +17,7 @@ import rhaHeader from './directives/header'
 import rhaOnchange from './directives/onChange'
 import rhaTitletemplate from './directives/titleTemplate'
 import autoFocus from './directives/autoFocus'
+import languageSelect from './directives/languageSelect'
 
 // Services
 import AlertService from './services/alertService'
@@ -45,6 +46,7 @@ app.directive('rhaHeader', rhaHeader);
 app.directive('rhaOnchange', rhaOnchange);
 app.directive('rhaTitletemplate', rhaTitletemplate);
 app.directive('autoFocus', autoFocus);
+app.directive('languageSelect', languageSelect);
 
 // Services
 app.service('AlertService', AlertService);

@@ -1,0 +1,3 @@
+label {{'Change Language  ' | translate}}
+select(ng-model='CaseService.currentLanguage')
+    option(ng-repeat="lang in supportedLanguages" ng-click="changeCurrentLanguage(lang.code)" value="{{lang.code}}") {{lang.name}}
