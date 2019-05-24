@@ -9479,7 +9479,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<div rha-403error=\"\"></div><div rha-404error=\"\"></div><div ng-show=\"HeaderService.sfdcIsHealthy\"></div><div rha-alert=\"\"></div><div ng-hide=\"failedToLoadCase || !securityService.loginStatus.userAllowedToManageCases\"><div ng-show=\"pageLoading\" class=\"spinner spinner-inline\"></div></div><div ng-hide=\"HeaderService.pageLoadFailure || !securityService.loginStatus.userAllowedToManageCases\" class=\"page-header\"><div ng-hide=\"page ===&quot;&quot;\" rha-titletemplate=\"\" page=\"{{page}}\"></div><div ng-show=\"page === &quot;caseView&quot;\">Filed on&nbsp;</div><div ng-show=\"securityService.loginStatus.isLoggedIn &amp;&amp; securityService.loginStatus.authedUser.has_chat &amp;&amp; HeaderService.sfdcIsHealthy\" rha-chatbutton=\"\"></div></div><div rha-loginstatus=\"\"></div><div ng-show=\"!HeaderService.sfdcIsHealthy\" ng-bind-html=\"parseSfdcOutageHtml()\"></div><language-select></language-select>");;return buf.join("");
+	  buf.push("<language-select></language-select><div rha-403error=\"\"></div><div rha-404error=\"\"></div><div ng-show=\"HeaderService.sfdcIsHealthy\"></div><div rha-alert=\"\"></div><div ng-hide=\"failedToLoadCase || !securityService.loginStatus.userAllowedToManageCases\"><div ng-show=\"pageLoading\" class=\"spinner spinner-inline\"></div></div><div ng-hide=\"HeaderService.pageLoadFailure || !securityService.loginStatus.userAllowedToManageCases\" class=\"page-header\"><div ng-hide=\"page ===&quot;&quot;\" rha-titletemplate=\"\" page=\"{{page}}\"></div><div ng-show=\"page === &quot;caseView&quot;\">Filed on&nbsp;</div><div ng-show=\"securityService.loginStatus.isLoggedIn &amp;&amp; securityService.loginStatus.authedUser.has_chat &amp;&amp; HeaderService.sfdcIsHealthy\" rha-chatbutton=\"\"></div></div><div rha-loginstatus=\"\"></div><div ng-show=\"!HeaderService.sfdcIsHealthy\" ng-bind-html=\"parseSfdcOutageHtml()\"></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -9495,7 +9495,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<label>{{'Change Language  ' | translate}}</label><select ng-model=\"CaseService.currentLanguage\"><option ng-repeat=\"lang in supportedLanguages\" ng-click=\"changeCurrentLanguage(lang.code)\" value=\"{{lang.code}}\">{{lang.name}}</option></select>");;return buf.join("");
+	  buf.push("<div class=\"language-select-container\"><label>{{'Change Language' | translate}}</label><select ng-model=\"HeaderService.currentLanguage\"><option ng-repeat=\"lang in HeaderService.supportedLanguages\" ng-click=\"HeaderService.changeCurrentLanguage(lang.code)\" value=\"{{lang.code}}\">{{lang.name}}</option></select></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -14182,18 +14182,9 @@
 	exports.default = function () {
 	    return {
 	        template: __webpack_require__(58)(),
-	        controller: function controller($scope, CaseService, gettextCatalog) {
-	            // The current language the text will be in.
-	            $scope.currentLanguage = gettextCatalog.currentLanguage;
-
-	            // The languages we have translations for
-	            $scope.supportedLanguages = [{ code: 'en', name: 'English' }, { code: 'de', name: 'German' }, { code: 'es', name: 'Spanish' }, { code: 'fr', name: 'French' }, { code: 'it', name: 'Italian' }, { code: 'ja', name: 'Japanese' }, { code: 'ko', name: 'Korean' }, { code: 'pt', name: 'Portuguese' }, { code: 'zh_CN', name: 'Chinese' }, { code: 'ru', name: 'Russia' }];
-
-	            // Switches the current language and broadcasts a 'change_language' event.
-	            $scope.changeCurrentLanguage = function (newLanguage) {
-	                $scope.currentLanguage = newLanguage;
-	                gettextCatalog.setCurrentLanguage(newLanguage);
-	            };
+	        controller: function controller($scope, HeaderService, gettextCatalog) {
+	            $scope.HeaderService = HeaderService;
+	            HeaderService.initCurrentLanguage();
 	        }
 	    };
 	};
@@ -15006,8 +14997,10 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var HeaderService = function HeaderService(COMMON_CONFIG, strataService, securityService, AlertService, $q) {
+	var HeaderService = function HeaderService(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window) {
 	    'ngInject';
+
+	    var _this = this;
 
 	    _classCallCheck(this, HeaderService);
 
@@ -15016,6 +15009,29 @@
 	    this.pageLoadFailure = false;
 	    this.showSurvey = true;
 	    this.showPartnerEscalationError = false;
+
+	    // The languages we have translations for
+	    this.supportedLanguages = [{ code: 'en_US', name: 'English' }, { code: 'de', name: 'German' }, { code: 'es', name: 'Spanish' }, { code: 'fr', name: 'French' }, { code: 'it', name: 'Italian' }, { code: 'ja', name: 'Japanese' }, { code: 'ko', name: 'Korean' }, { code: 'pt', name: 'Portuguese' }, { code: 'zh_CN', name: 'Chinese' }, { code: 'ru', name: 'Russia' }];
+
+	    this.initCurrentLanguage = function () {
+	        // The current language the text will be in.
+	        var currentLanguage = window.localStorage.getItem('current_language');
+	        if (currentLanguage && currentLanguage !== gettextCatalog.currentLanguage) {
+	            gettextCatalog.setCurrentLanguage(currentLanguage);
+	            _this.currentLanguage = currentLanguage;
+	        } else {
+	            _this.currentLanguage = gettextCatalog.currentLanguage;
+	        }
+	    };
+
+	    // Switches the current language.
+	    this.changeCurrentLanguage = function (newLanguage) {
+	        _this.currentLanguage = newLanguage;
+	        gettextCatalog.setCurrentLanguage(newLanguage);
+	        window.localStorage.setItem('current_language', newLanguage);
+	        $window.location.reload();
+	    };
+
 	    this.checkSfdcHealth = function () {
 	        if (securityService.loginStatus.isLoggedIn) {
 	            var deferred = $q.defer();
@@ -15035,7 +15051,7 @@
 	        }
 	    };
 	};
-	HeaderService.$inject = ["COMMON_CONFIG", "strataService", "securityService", "AlertService", "$q"];
+	HeaderService.$inject = ["COMMON_CONFIG", "gettextCatalog", "strataService", "securityService", "AlertService", "$q", "$window"];
 
 	exports.default = HeaderService;
 
