@@ -9479,7 +9479,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<language-select></language-select><div rha-403error=\"\"></div><div rha-404error=\"\"></div><div ng-show=\"HeaderService.sfdcIsHealthy\"></div><div rha-alert=\"\"></div><div ng-hide=\"failedToLoadCase || !securityService.loginStatus.userAllowedToManageCases\"><div ng-show=\"pageLoading\" class=\"spinner spinner-inline\"></div></div><div ng-hide=\"HeaderService.pageLoadFailure || !securityService.loginStatus.userAllowedToManageCases\" class=\"page-header\"><div ng-hide=\"page ===&quot;&quot;\" rha-titletemplate=\"\" page=\"{{page}}\"></div><div ng-show=\"page === &quot;caseView&quot;\">Filed on&nbsp;</div><div ng-show=\"securityService.loginStatus.isLoggedIn &amp;&amp; securityService.loginStatus.authedUser.has_chat &amp;&amp; HeaderService.sfdcIsHealthy\" rha-chatbutton=\"\"></div></div><div rha-loginstatus=\"\"></div><div ng-show=\"!HeaderService.sfdcIsHealthy\" ng-bind-html=\"parseSfdcOutageHtml()\"></div>");;return buf.join("");
+	  buf.push("<div rha-403error=\"\"></div><div rha-404error=\"\"></div><div ng-show=\"HeaderService.sfdcIsHealthy\"></div><div rha-alert=\"\"></div><div ng-hide=\"failedToLoadCase || !securityService.loginStatus.userAllowedToManageCases\"><div ng-show=\"pageLoading\" class=\"spinner spinner-inline\"></div></div><div ng-hide=\"HeaderService.pageLoadFailure || !securityService.loginStatus.userAllowedToManageCases\" class=\"page-header\"><div ng-hide=\"page ===&quot;&quot;\" rha-titletemplate=\"\" page=\"{{page}}\" class=\"title-template\"></div><div ng-show=\"page === &quot;caseView&quot;\">Filed on&nbsp;</div><div ng-show=\"securityService.loginStatus.isLoggedIn &amp;&amp; securityService.loginStatus.authedUser.has_chat &amp;&amp; HeaderService.sfdcIsHealthy\" rha-chatbutton=\"\"></div></div><div rha-loginstatus=\"\"></div><div ng-show=\"!HeaderService.sfdcIsHealthy\" ng-bind-html=\"parseSfdcOutageHtml()\"></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -9495,7 +9495,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<div class=\"language-select-container\"><label>{{'Change Language' | translate}}</label><select ng-model=\"HeaderService.currentLanguage\"><option ng-repeat=\"lang in HeaderService.supportedLanguages\" ng-click=\"HeaderService.changeCurrentLanguage(lang.code)\" value=\"{{lang.code}}\">{{lang.name}}</option></select></div>");;return buf.join("");
+	  buf.push("<div class=\"language-selector\"><select chosen width=\"&quot;auto&quot;\" ng-model=\"HeaderService.currentLanguage\" ng-change=\"HeaderService.changeCurrentLanguage()\" ng-options=\"lang.code as lang.name for lang in HeaderService.supportedLanguages\" disable_search_threshold=\"12\"></select></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -9511,7 +9511,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<h1 ng-show=\"COMMON_CONFIG.showTitle\" class=\"page-title\">{{getPageTitle()}}</h1>");;return buf.join("");
+	  buf.push("<h1 ng-show=\"COMMON_CONFIG.showTitle\" class=\"page-title\">{{getPageTitle()}}</h1><language-select></language-select>");;return buf.join("");
 	};
 
 /***/ },
@@ -14182,9 +14182,9 @@
 	exports.default = function () {
 	    return {
 	        template: __webpack_require__(58)(),
-	        controller: function controller($scope, HeaderService, gettextCatalog) {
+	        controller: function controller($scope, HeaderService) {
 	            $scope.HeaderService = HeaderService;
-	            HeaderService.initCurrentLanguage();
+	            $scope.currentLanguage = HeaderService.initCurrentLanguage();
 	        }
 	    };
 	};
@@ -15011,7 +15011,7 @@
 	    this.showPartnerEscalationError = false;
 
 	    // The languages we have translations for
-	    this.supportedLanguages = [{ code: 'en_US', name: 'English' }, { code: 'de', name: 'German' }, { code: 'es', name: 'Spanish' }, { code: 'fr', name: 'French' }, { code: 'it', name: 'Italian' }, { code: 'ja', name: 'Japanese' }, { code: 'ko', name: 'Korean' }, { code: 'pt', name: 'Portuguese' }, { code: 'zh_CN', name: 'Chinese' }, { code: 'ru', name: 'Russia' }];
+	    this.supportedLanguages = [{ code: 'en_US', name: gettextCatalog.getString('English') }, { code: 'de', name: gettextCatalog.getString('German') }, { code: 'es', name: gettextCatalog.getString('Spanish') }, { code: 'fr', name: gettextCatalog.getString('French') }, { code: 'it', name: gettextCatalog.getString('Italian') }, { code: 'ja', name: gettextCatalog.getString('Japanese') }, { code: 'ko', name: gettextCatalog.getString('Korean') }, { code: 'pt', name: gettextCatalog.getString('Portuguese') }, { code: 'zh_CN', name: gettextCatalog.getString('Chinese') }, { code: 'ru', name: gettextCatalog.getString('Russian') }];
 
 	    this.initCurrentLanguage = function () {
 	        // The current language the text will be in.
@@ -15025,10 +15025,9 @@
 	    };
 
 	    // Switches the current language.
-	    this.changeCurrentLanguage = function (newLanguage) {
-	        _this.currentLanguage = newLanguage;
-	        gettextCatalog.setCurrentLanguage(newLanguage);
-	        window.localStorage.setItem('current_language', newLanguage);
+	    this.changeCurrentLanguage = function () {
+	        gettextCatalog.setCurrentLanguage(_this.currentLanguage);
+	        window.localStorage.setItem('current_language', _this.currentLanguage);
 	        $window.location.reload();
 	    };
 

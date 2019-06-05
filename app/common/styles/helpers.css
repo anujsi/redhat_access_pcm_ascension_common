@@ -96,9 +96,3 @@
         width: 95% !important;
     }
 }
-
-.language-select-container, language-select {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}

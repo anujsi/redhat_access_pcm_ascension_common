@@ -1,0 +1,4 @@
+.title-template {
+    display: flex;
+    justify-content: space-between;
+}

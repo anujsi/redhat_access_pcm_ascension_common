@@ -12,16 +12,16 @@ export default class HeaderService {
 
         // The languages we have translations for
         this.supportedLanguages = [
-            {code: 'en_US', name: 'English'},
-            {code: 'de', name: 'German'},
-            {code: 'es', name: 'Spanish'},
-            {code: 'fr', name: 'French'},
-            {code: 'it', name: 'Italian'},
-            {code: 'ja', name: 'Japanese'},
-            {code: 'ko', name: 'Korean'},
-            {code: 'pt', name: 'Portuguese'},
-            {code: 'zh_CN', name: 'Chinese'},
-            {code: 'ru', name: 'Russian'}
+            {code: 'en_US', name: gettextCatalog.getString('English')},
+            {code: 'de', name: gettextCatalog.getString('German')},
+            {code: 'es', name: gettextCatalog.getString('Spanish')},
+            {code: 'fr', name: gettextCatalog.getString('French')},
+            {code: 'it', name: gettextCatalog.getString('Italian')},
+            {code: 'ja', name: gettextCatalog.getString('Japanese')},
+            {code: 'ko', name: gettextCatalog.getString('Korean')},
+            {code: 'pt', name: gettextCatalog.getString('Portuguese')},
+            {code: 'zh_CN', name: gettextCatalog.getString('Chinese')},
+            {code: 'ru', name: gettextCatalog.getString('Russian')}
         ];
 
         this.initCurrentLanguage = () => {
@@ -37,11 +37,9 @@ export default class HeaderService {
 
         // Switches the current language.
         this.changeCurrentLanguage = () => {
-            console.log(this.currentLanguage)
-            // this.currentLanguage = newLanguage;
-            // gettextCatalog.setCurrentLanguage(newLanguage);
-            // window.localStorage.setItem('current_language', newLanguage);
-            // $window.location.reload();
+            gettextCatalog.setCurrentLanguage(this.currentLanguage);
+            window.localStorage.setItem('current_language', this.currentLanguage);
+            $window.location.reload();
         };
 
         this.checkSfdcHealth = function () {
