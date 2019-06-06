@@ -1,7 +1,7 @@
 'use strict';
 
 export default class HeaderService {
-    constructor(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window) {
+    constructor(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window, $rootScope) {
         'ngInject';
 
         this.sfdcIsHealthy = COMMON_CONFIG.sfdcIsHealthy;
@@ -12,7 +12,7 @@ export default class HeaderService {
 
         // The languages we have translations for
         this.supportedLanguages = [
-            {code: 'en_US', name: gettextCatalog.getString('English')},
+            {code: 'en', name: gettextCatalog.getString('English')},
             {code: 'de', name: gettextCatalog.getString('German')},
             {code: 'es', name: gettextCatalog.getString('Spanish')},
             {code: 'fr', name: gettextCatalog.getString('French')},
@@ -24,22 +24,46 @@ export default class HeaderService {
             {code: 'ru', name: gettextCatalog.getString('Russian')}
         ];
 
+        this.getRhLocale = () => {
+            return document.cookie.split(';').filter((item) => item.trim().startsWith('rh_locale='))[0].replace('rh_locale=', '').trim();
+        };
+
         this.initCurrentLanguage = () => {
-            // The current language the text will be in.
-            const currentLanguage = window.localStorage.getItem('current_language');
+            const currentLocale = this.getRhLocale();
+            const lastLocale = window.localStorage.getItem('last_rh_locale');
+
+            let currentLanguage;
+            if (lastLocale === currentLocale) {
+                currentLanguage = window.localStorage.getItem('current_language');
+            } else {
+                currentLanguage = currentLocale;
+                window.localStorage.setItem('current_language', currentLocale);
+            }
+
             if (currentLanguage && currentLanguage !== gettextCatalog.currentLanguage) {
                 gettextCatalog.setCurrentLanguage(currentLanguage);
                 this.currentLanguage = currentLanguage;
             } else {
                 this.currentLanguage = gettextCatalog.currentLanguage;
             }
+
+            if (!lastLocale || lastLocale !== currentLocale) {
+                window.localStorage.setItem('last_rh_locale', currentLocale);
+            }
         };
 
         // Switches the current language.
         this.changeCurrentLanguage = () => {
+            const changeLanguageChromeLink = document.getElementById(this.currentLanguage);
             gettextCatalog.setCurrentLanguage(this.currentLanguage);
             window.localStorage.setItem('current_language', this.currentLanguage);
-            $window.location.reload();
+
+            if (!changeLanguageChromeLink) {
+                $window.location.reload();
+            } else {
+                window.localStorage.removeItem('last_rh_locale');
+                changeLanguageChromeLink.click();
+            }
         };
 
         this.checkSfdcHealth = function () {

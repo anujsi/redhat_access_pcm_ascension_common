@@ -1,9 +1,9 @@
-.language-selector
+.language-selector(ng-if='HeaderService.currentLanguage')
     select(
         chosen,
         width='"auto"',
         ng-model='HeaderService.currentLanguage'
         ng-change='HeaderService.changeCurrentLanguage()',
         ng-options='lang.code as lang.name for lang in HeaderService.supportedLanguages'
-        disable_search_threshold=12
+        disable_search_threshold=13
     )

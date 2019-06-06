@@ -4,6 +4,6 @@ export default () => ({
     template: require('../views/languageSelect.jade')(),
     controller: ($scope, HeaderService) => {
         $scope.HeaderService = HeaderService;
-        $scope.currentLanguage = HeaderService.initCurrentLanguage();
+        HeaderService.initCurrentLanguage();
     }
 });

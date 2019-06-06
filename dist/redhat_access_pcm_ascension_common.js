@@ -9495,7 +9495,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<div class=\"language-selector\"><select chosen width=\"&quot;auto&quot;\" ng-model=\"HeaderService.currentLanguage\" ng-change=\"HeaderService.changeCurrentLanguage()\" ng-options=\"lang.code as lang.name for lang in HeaderService.supportedLanguages\" disable_search_threshold=\"12\"></select></div>");;return buf.join("");
+	  buf.push("<div ng-if=\"HeaderService.currentLanguage\" class=\"language-selector\"><select chosen width=\"&quot;auto&quot;\" ng-model=\"HeaderService.currentLanguage\" ng-change=\"HeaderService.changeCurrentLanguage()\" ng-options=\"lang.code as lang.name for lang in HeaderService.supportedLanguages\" disable_search_threshold=\"13\"></select></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -14184,7 +14184,7 @@
 	        template: __webpack_require__(58)(),
 	        controller: function controller($scope, HeaderService) {
 	            $scope.HeaderService = HeaderService;
-	            $scope.currentLanguage = HeaderService.initCurrentLanguage();
+	            HeaderService.initCurrentLanguage();
 	        }
 	    };
 	};
@@ -14997,7 +14997,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var HeaderService = function HeaderService(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window) {
+	var HeaderService = function HeaderService(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window, $rootScope) {
 	    'ngInject';
 
 	    var _this = this;
@@ -15011,24 +15011,50 @@
 	    this.showPartnerEscalationError = false;
 
 	    // The languages we have translations for
-	    this.supportedLanguages = [{ code: 'en_US', name: gettextCatalog.getString('English') }, { code: 'de', name: gettextCatalog.getString('German') }, { code: 'es', name: gettextCatalog.getString('Spanish') }, { code: 'fr', name: gettextCatalog.getString('French') }, { code: 'it', name: gettextCatalog.getString('Italian') }, { code: 'ja', name: gettextCatalog.getString('Japanese') }, { code: 'ko', name: gettextCatalog.getString('Korean') }, { code: 'pt', name: gettextCatalog.getString('Portuguese') }, { code: 'zh_CN', name: gettextCatalog.getString('Chinese') }, { code: 'ru', name: gettextCatalog.getString('Russian') }];
+	    this.supportedLanguages = [{ code: 'en', name: gettextCatalog.getString('English') }, { code: 'de', name: gettextCatalog.getString('German') }, { code: 'es', name: gettextCatalog.getString('Spanish') }, { code: 'fr', name: gettextCatalog.getString('French') }, { code: 'it', name: gettextCatalog.getString('Italian') }, { code: 'ja', name: gettextCatalog.getString('Japanese') }, { code: 'ko', name: gettextCatalog.getString('Korean') }, { code: 'pt', name: gettextCatalog.getString('Portuguese') }, { code: 'zh_CN', name: gettextCatalog.getString('Chinese') }, { code: 'ru', name: gettextCatalog.getString('Russian') }];
+
+	    this.getRhLocale = function () {
+	        return document.cookie.split(';').filter(function (item) {
+	            return item.trim().startsWith('rh_locale=');
+	        })[0].replace('rh_locale=', '').trim();
+	    };
 
 	    this.initCurrentLanguage = function () {
-	        // The current language the text will be in.
-	        var currentLanguage = window.localStorage.getItem('current_language');
+	        var currentLocale = _this.getRhLocale();
+	        var lastLocale = window.localStorage.getItem('last_rh_locale');
+
+	        var currentLanguage = void 0;
+	        if (lastLocale === currentLocale) {
+	            currentLanguage = window.localStorage.getItem('current_language');
+	        } else {
+	            currentLanguage = currentLocale;
+	            window.localStorage.setItem('current_language', currentLocale);
+	        }
+
 	        if (currentLanguage && currentLanguage !== gettextCatalog.currentLanguage) {
 	            gettextCatalog.setCurrentLanguage(currentLanguage);
 	            _this.currentLanguage = currentLanguage;
 	        } else {
 	            _this.currentLanguage = gettextCatalog.currentLanguage;
 	        }
+
+	        if (!lastLocale || lastLocale !== currentLocale) {
+	            window.localStorage.setItem('last_rh_locale', currentLocale);
+	        }
 	    };
 
 	    // Switches the current language.
 	    this.changeCurrentLanguage = function () {
+	        var changeLanguageChromeLink = document.getElementById(_this.currentLanguage);
 	        gettextCatalog.setCurrentLanguage(_this.currentLanguage);
 	        window.localStorage.setItem('current_language', _this.currentLanguage);
-	        $window.location.reload();
+
+	        if (!changeLanguageChromeLink) {
+	            $window.location.reload();
+	        } else {
+	            window.localStorage.removeItem('last_rh_locale');
+	            changeLanguageChromeLink.click();
+	        }
 	    };
 
 	    this.checkSfdcHealth = function () {
@@ -15050,7 +15076,7 @@
 	        }
 	    };
 	};
-	HeaderService.$inject = ["COMMON_CONFIG", "gettextCatalog", "strataService", "securityService", "AlertService", "$q", "$window"];
+	HeaderService.$inject = ["COMMON_CONFIG", "gettextCatalog", "strataService", "securityService", "AlertService", "$q", "$window", "$rootScope"];
 
 	exports.default = HeaderService;
 
