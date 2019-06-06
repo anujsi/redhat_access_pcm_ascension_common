@@ -1,7 +1,7 @@
 'use strict';
 
 export default class HeaderService {
-    constructor(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window, $rootScope) {
+    constructor(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window) {
         'ngInject';
 
         this.sfdcIsHealthy = COMMON_CONFIG.sfdcIsHealthy;

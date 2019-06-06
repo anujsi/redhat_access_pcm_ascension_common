@@ -6,6 +6,7 @@ import ConfigurationService from './services/configurationService'
 
 require('./ui-utils.module');
 require('./header.module');
+require('angular-ui-bootstrap/dist/ui-bootstrap-tpls.js');
 
 const app = angular.module('RedhatAccess.common', [
     'RedhatAccess.ui-utils',
