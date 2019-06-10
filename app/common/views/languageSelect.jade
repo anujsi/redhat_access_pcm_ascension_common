@@ -4,6 +4,6 @@
         width='"auto"',
         ng-model='HeaderService.currentLanguage'
         ng-change='HeaderService.changeCurrentLanguage()',
-        ng-options='lang.code as lang.name for lang in HeaderService.supportedLanguages'
+        ng-options='k as v | translate for (k, v) in supportedLanguages'
         disable_search_threshold=13
     )

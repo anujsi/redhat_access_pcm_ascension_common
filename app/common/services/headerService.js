@@ -10,22 +10,9 @@ export default class HeaderService {
         this.showSurvey = true;
         this.showPartnerEscalationError = false;
 
-        // The languages we have translations for
-        this.supportedLanguages = [
-            {code: 'en', name: gettextCatalog.getString('English')},
-            {code: 'de', name: gettextCatalog.getString('German')},
-            {code: 'es', name: gettextCatalog.getString('Spanish')},
-            {code: 'fr', name: gettextCatalog.getString('French')},
-            {code: 'it', name: gettextCatalog.getString('Italian')},
-            {code: 'ja', name: gettextCatalog.getString('Japanese')},
-            {code: 'ko', name: gettextCatalog.getString('Korean')},
-            {code: 'pt', name: gettextCatalog.getString('Portuguese')},
-            {code: 'zh_CN', name: gettextCatalog.getString('Chinese')},
-            {code: 'ru', name: gettextCatalog.getString('Russian')}
-        ];
-
         this.getRhLocale = () => {
-            return document.cookie.split(';').filter((item) => item.trim().startsWith('rh_locale='))[0].replace('rh_locale=', '').trim();
+            const locale = document.cookie.split(';').filter((item) => item.trim().startsWith('rh_locale='))[0];
+            return locale ? locale.replace('rh_locale=', '').trim() : 'en';
         };
 
         this.initCurrentLanguage = () => {
@@ -36,7 +23,7 @@ export default class HeaderService {
             if (lastLocale === currentLocale) {
                 currentLanguage = window.localStorage.getItem('current_language');
             } else {
-                currentLanguage = currentLocale;
+                currentLanguage = currentLocale === 'en_US' ? 'en' : currentLocale;
                 window.localStorage.setItem('current_language', currentLocale);
             }
 

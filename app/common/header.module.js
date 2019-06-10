@@ -27,6 +27,9 @@ import StrataService from './services/strataService'
 import UdsService from './services/udsService'
 import ConfigService from './services/configService';
 
+// Constants
+import supportedLanguages from './constants/supportedLanguages';
+
 const app = angular.module('RedhatAccess.header', []);
 
 // Controllers
@@ -55,5 +58,8 @@ app.service('HeaderService', HeaderService);
 app.service('strataService', StrataService);
 app.service('udsService', UdsService);
 app.service('ConfigService', ConfigService);
+
+// constants
+app.constant('SUPPORTED_LANGUAGES', supportedLanguages);
 
 export default app.name;

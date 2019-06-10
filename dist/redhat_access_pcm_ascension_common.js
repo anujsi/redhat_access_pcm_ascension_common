@@ -58,19 +58,19 @@
 
 	var _commonConfig2 = _interopRequireDefault(_commonConfig);
 
-	var _configurationService = __webpack_require__(204);
+	var _configurationService = __webpack_require__(205);
 
 	var _configurationService2 = _interopRequireDefault(_configurationService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(211);
-	__webpack_require__(201);
+	__webpack_require__(212);
+	__webpack_require__(202);
 	__webpack_require__(53);
 
 	var app = angular.module('RedhatAccess.common', ['RedhatAccess.ui-utils', 'angular-cache']).config(["CacheFactoryProvider", function (CacheFactoryProvider) {}]).constant('RESOURCE_TYPES', _resourceTypes2.default).value('COMMON_CONFIG', _commonConfig2.default).factory('configurationService', _configurationService2.default);
 
-	__webpack_require__(219);
+	__webpack_require__(220);
 
 	exports.default = app.name;
 
@@ -327,7 +327,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(223).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(224).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -16848,7 +16848,7 @@
 	  var jade_mixins = {};
 	  var jade_interp;
 
-	  buf.push("<div class=\"language-selector\"><select chosen width=\"&quot;auto&quot;\" ng-model=\"HeaderService.currentLanguage\" ng-change=\"HeaderService.changeCurrentLanguage()\" ng-options=\"lang.code as lang.name for lang in HeaderService.supportedLanguages\" uib-tooltip=\"{{&quot;Language Selector&quot; | translate}}\" disable_search_threshold=\"13\"></select></div>");;return buf.join("");
+	  buf.push("<div uib-tooltip=\"{{&quot;Language Selector&quot; | translate}}\" class=\"language-selector\"><select chosen width=\"&quot;auto&quot;\" ng-model=\"HeaderService.currentLanguage\" ng-change=\"HeaderService.changeCurrentLanguage()\" ng-options=\"k as v | translate for (k, v) in supportedLanguages\" disable_search_threshold=\"13\"></select></div>");;return buf.join("");
 	};
 
 /***/ },
@@ -20930,6 +20930,28 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.default = {
+	    en: 'English',
+	    de: 'German',
+	    es: 'Spainsh',
+	    fr: 'French',
+	    it: 'Italian',
+	    ja: 'Japanese',
+	    ko: 'Korean',
+	    pt: 'Portuguese',
+	    "zh_CN": 'Chinese',
+	    ru: 'Russian'
+	};
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20957,7 +20979,7 @@
 	exports.default = FourOhThree;
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20981,7 +21003,7 @@
 	exports.default = FourOhFour;
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21013,7 +21035,7 @@
 	exports.default = AlertController;
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21140,7 +21162,7 @@
 	exports.default = ChatButton;
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21271,7 +21293,7 @@
 	exports.default = HeaderController;
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21322,7 +21344,7 @@
 	exports.default = TitleViewCtrl;
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21340,7 +21362,7 @@
 	};
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21358,7 +21380,7 @@
 	};
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21376,7 +21398,7 @@
 	};
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21399,7 +21421,7 @@
 	}];
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21423,7 +21445,7 @@
 	};
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21437,7 +21459,7 @@
 
 	    return {
 	        restrict: 'A',
-	        template: __webpack_require__(221),
+	        template: __webpack_require__(222),
 	        link: function link(scope, elm) {
 	            scope.choiceClicked = function (choice) {
 	                choice.checked = !choice.checked;
@@ -21459,7 +21481,7 @@
 	}];
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21482,7 +21504,7 @@
 	};
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21508,7 +21530,7 @@
 	};
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21527,7 +21549,7 @@
 	};
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21539,7 +21561,8 @@
 	exports.default = function () {
 	    return {
 	        template: __webpack_require__(59)(),
-	        controller: function controller($scope, HeaderService) {
+	        controller: function controller($scope, HeaderService, SUPPORTED_LANGUAGES) {
+	            $scope.supportedLanguages = SUPPORTED_LANGUAGES;
 	            $scope.HeaderService = HeaderService;
 	            HeaderService.initCurrentLanguage();
 	        }
@@ -21547,7 +21570,7 @@
 	};
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21566,7 +21589,7 @@
 	};
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21603,7 +21626,7 @@
 	}];
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21645,7 +21668,7 @@
 	}];
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21664,7 +21687,7 @@
 	};
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21699,7 +21722,7 @@
 	}];
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21816,7 +21839,7 @@
 	};
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21834,7 +21857,7 @@
 	}];
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21845,99 +21868,106 @@
 	  value: true
 	});
 
-	var _ = __webpack_require__(178);
+	var _ = __webpack_require__(179);
 
 	var _2 = _interopRequireDefault(_);
 
-	var _3 = __webpack_require__(179);
+	var _3 = __webpack_require__(180);
 
 	var _4 = _interopRequireDefault(_3);
 
-	var _alert = __webpack_require__(180);
+	var _alert = __webpack_require__(181);
 
 	var _alert2 = _interopRequireDefault(_alert);
 
-	var _chatButton = __webpack_require__(181);
+	var _chatButton = __webpack_require__(182);
 
 	var _chatButton2 = _interopRequireDefault(_chatButton);
 
-	var _header = __webpack_require__(182);
+	var _header = __webpack_require__(183);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _titleView = __webpack_require__(183);
+	var _titleView = __webpack_require__(184);
 
 	var _titleView2 = _interopRequireDefault(_titleView);
 
-	var _5 = __webpack_require__(184);
+	var _5 = __webpack_require__(185);
 
 	var _6 = _interopRequireDefault(_5);
 
-	var _7 = __webpack_require__(185);
+	var _7 = __webpack_require__(186);
 
 	var _8 = _interopRequireDefault(_7);
 
-	var _alert3 = __webpack_require__(186);
+	var _alert3 = __webpack_require__(187);
 
 	var _alert4 = _interopRequireDefault(_alert3);
 
-	var _chatButton3 = __webpack_require__(188);
+	var _chatButton3 = __webpack_require__(189);
 
 	var _chatButton4 = _interopRequireDefault(_chatButton3);
 
-	var _header3 = __webpack_require__(192);
+	var _header3 = __webpack_require__(193);
 
 	var _header4 = _interopRequireDefault(_header3);
 
-	var _onChange = __webpack_require__(194);
+	var _onChange = __webpack_require__(195);
 
 	var _onChange2 = _interopRequireDefault(_onChange);
 
-	var _titleTemplate = __webpack_require__(197);
+	var _titleTemplate = __webpack_require__(198);
 
 	var _titleTemplate2 = _interopRequireDefault(_titleTemplate);
 
-	var _autoFocus = __webpack_require__(187);
+	var _autoFocus = __webpack_require__(188);
 
 	var _autoFocus2 = _interopRequireDefault(_autoFocus);
 
-	var _languageSelect = __webpack_require__(193);
+	var _languageSelect = __webpack_require__(194);
 
 	var _languageSelect2 = _interopRequireDefault(_languageSelect);
 
-	var _alertService = __webpack_require__(202);
+	var _alertService = __webpack_require__(203);
 
 	var _alertService2 = _interopRequireDefault(_alertService);
 
-	var _constantsService = __webpack_require__(205);
+	var _constantsService = __webpack_require__(206);
 
 	var _constantsService2 = _interopRequireDefault(_constantsService);
 
-	var _headerService = __webpack_require__(206);
+	var _headerService = __webpack_require__(207);
 
 	var _headerService2 = _interopRequireDefault(_headerService);
 
-	var _strataService = __webpack_require__(208);
+	var _strataService = __webpack_require__(209);
 
 	var _strataService2 = _interopRequireDefault(_strataService);
 
-	var _udsService = __webpack_require__(210);
+	var _udsService = __webpack_require__(211);
 
 	var _udsService2 = _interopRequireDefault(_udsService);
 
-	var _configService = __webpack_require__(203);
+	var _configService = __webpack_require__(204);
 
 	var _configService2 = _interopRequireDefault(_configService);
 
+	var _supportedLanguages = __webpack_require__(178);
+
+	var _supportedLanguages2 = _interopRequireDefault(_supportedLanguages);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// Services
+	// Directives
 	var app = angular.module('RedhatAccess.header', []);
 
 	// Controllers
 
 
-	// Directives
+	// Constants
+
+
+	// Services
 	app.controller('403', _2.default);
 	app.controller('404', _4.default);
 	app.controller('AlertController', _alert2.default);
@@ -21964,10 +21994,13 @@
 	app.service('udsService', _udsService2.default);
 	app.service('ConfigService', _configService2.default);
 
+	// constants
+	app.constant('SUPPORTED_LANGUAGES', _supportedLanguages2.default);
+
 	exports.default = app.name;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22065,7 +22098,7 @@
 	exports.default = AlertService;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22169,7 +22202,7 @@
 	exports.default = ConfigService;
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22193,7 +22226,7 @@
 	}];
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22343,7 +22376,7 @@
 	exports.default = ConstantsService;
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22354,7 +22387,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var HeaderService = function HeaderService(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window, $rootScope) {
+	var HeaderService = function HeaderService(COMMON_CONFIG, gettextCatalog, strataService, securityService, AlertService, $q, $window) {
 	    'ngInject';
 
 	    var _this = this;
@@ -22367,13 +22400,11 @@
 	    this.showSurvey = true;
 	    this.showPartnerEscalationError = false;
 
-	    // The languages we have translations for
-	    this.supportedLanguages = [{ code: 'en', name: gettextCatalog.getString('English') }, { code: 'de', name: gettextCatalog.getString('German') }, { code: 'es', name: gettextCatalog.getString('Spanish') }, { code: 'fr', name: gettextCatalog.getString('French') }, { code: 'it', name: gettextCatalog.getString('Italian') }, { code: 'ja', name: gettextCatalog.getString('Japanese') }, { code: 'ko', name: gettextCatalog.getString('Korean') }, { code: 'pt', name: gettextCatalog.getString('Portuguese') }, { code: 'zh_CN', name: gettextCatalog.getString('Chinese') }, { code: 'ru', name: gettextCatalog.getString('Russian') }];
-
 	    this.getRhLocale = function () {
-	        return document.cookie.split(';').filter(function (item) {
+	        var locale = document.cookie.split(';').filter(function (item) {
 	            return item.trim().startsWith('rh_locale=');
-	        })[0].replace('rh_locale=', '').trim();
+	        })[0];
+	        return locale ? locale.replace('rh_locale=', '').trim() : 'en';
 	    };
 
 	    this.initCurrentLanguage = function () {
@@ -22384,7 +22415,7 @@
 	        if (lastLocale === currentLocale) {
 	            currentLanguage = window.localStorage.getItem('current_language');
 	        } else {
-	            currentLanguage = currentLocale;
+	            currentLanguage = currentLocale === 'en_US' ? 'en' : currentLocale;
 	            window.localStorage.setItem('current_language', currentLocale);
 	        }
 
@@ -22433,12 +22464,12 @@
 	        }
 	    };
 	};
-	HeaderService.$inject = ["COMMON_CONFIG", "gettextCatalog", "strataService", "securityService", "AlertService", "$q", "$window", "$rootScope"];
+	HeaderService.$inject = ["COMMON_CONFIG", "gettextCatalog", "strataService", "securityService", "AlertService", "$q", "$window"];
 
 	exports.default = HeaderService;
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22505,7 +22536,7 @@
 	exports.default = RHAUtils;
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23424,7 +23455,7 @@
 	exports.default = StrataService;
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23442,7 +23473,7 @@
 	}];
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23453,7 +23484,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var uds = __webpack_require__(222);
+	var uds = __webpack_require__(223);
 
 	var UdsService = function UdsService() {
 	    'ngInject';
@@ -23853,7 +23884,7 @@
 	exports.default = UdsService;
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23864,43 +23895,43 @@
 	  value: true
 	});
 
-	var _rhaUtils = __webpack_require__(207);
+	var _rhaUtils = __webpack_require__(208);
 
 	var _rhaUtils2 = _interopRequireDefault(_rhaUtils);
 
-	var _translate = __webpack_require__(209);
+	var _translate = __webpack_require__(210);
 
 	var _translate2 = _interopRequireDefault(_translate);
 
-	var _trust = __webpack_require__(200);
+	var _trust = __webpack_require__(201);
 
 	var _trust2 = _interopRequireDefault(_trust);
 
-	var _enter = __webpack_require__(191);
+	var _enter = __webpack_require__(192);
 
 	var _enter2 = _interopRequireDefault(_enter);
 
-	var _resizable = __webpack_require__(196);
+	var _resizable = __webpack_require__(197);
 
 	var _resizable2 = _interopRequireDefault(_resizable);
 
-	var _choice = __webpack_require__(189);
+	var _choice = __webpack_require__(190);
 
 	var _choice2 = _interopRequireDefault(_choice);
 
-	var _optionsDisabled = __webpack_require__(195);
+	var _optionsDisabled = __webpack_require__(196);
 
 	var _optionsDisabled2 = _interopRequireDefault(_optionsDisabled);
 
-	var _choicetree = __webpack_require__(190);
+	var _choicetree = __webpack_require__(191);
 
 	var _choicetree2 = _interopRequireDefault(_choicetree);
 
-	var _treeViewSelectorData = __webpack_require__(198);
+	var _treeViewSelectorData = __webpack_require__(199);
 
 	var _treeViewSelectorData2 = _interopRequireDefault(_treeViewSelectorData);
 
-	var _treeViewSelectorUtils = __webpack_require__(199);
+	var _treeViewSelectorUtils = __webpack_require__(200);
 
 	var _treeViewSelectorUtils2 = _interopRequireDefault(_treeViewSelectorUtils);
 
@@ -23939,7 +23970,7 @@
 	exports.default = app.name;
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23958,7 +23989,7 @@
 	};
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23969,7 +24000,7 @@
 	exports.default = { verbose: true };
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23986,7 +24017,7 @@
 	};
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24016,7 +24047,7 @@
 	exports.default = LoginModal;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24045,7 +24076,7 @@
 	exports.default = SecurityController;
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24075,7 +24106,7 @@
 	exports.default = SessionExpireModal;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24093,7 +24124,7 @@
 	};
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24104,35 +24135,35 @@
 	    value: true
 	});
 
-	var _securityController = __webpack_require__(216);
+	var _securityController = __webpack_require__(217);
 
 	var _securityController2 = _interopRequireDefault(_securityController);
 
-	var _loginModal = __webpack_require__(215);
+	var _loginModal = __webpack_require__(216);
 
 	var _loginModal2 = _interopRequireDefault(_loginModal);
 
-	var _sessionExpireModal = __webpack_require__(217);
+	var _sessionExpireModal = __webpack_require__(218);
 
 	var _sessionExpireModal2 = _interopRequireDefault(_sessionExpireModal);
 
-	var _loginStatus = __webpack_require__(218);
+	var _loginStatus = __webpack_require__(219);
 
 	var _loginStatus2 = _interopRequireDefault(_loginStatus);
 
-	var _securityService = __webpack_require__(220);
+	var _securityService = __webpack_require__(221);
 
 	var _securityService2 = _interopRequireDefault(_securityService);
 
-	var _authEvents = __webpack_require__(212);
+	var _authEvents = __webpack_require__(213);
 
 	var _authEvents2 = _interopRequireDefault(_authEvents);
 
-	var _loginViewConfig = __webpack_require__(213);
+	var _loginViewConfig = __webpack_require__(214);
 
 	var _loginViewConfig2 = _interopRequireDefault(_loginViewConfig);
 
-	var _securityConfig = __webpack_require__(214);
+	var _securityConfig = __webpack_require__(215);
 
 	var _securityConfig2 = _interopRequireDefault(_securityConfig);
 
@@ -24160,7 +24191,7 @@
 	exports.default = app.name;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24579,13 +24610,13 @@
 	exports.default = SecurityService;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	module.exports = "<li class=\"rha-treeselector-node\">\n    <div>\n        <span class=\"icon\" ng-class=\"{collapsed: choice.collapsed, expanded: !choice.collapsed}\" ng-show=\"choice.children.length > 0\" ng-click=\"choice.collapsed = !choice.collapsed\">\n        </span>\n        <span class=\"label\" ng-if=\"choice.children.length > 0\" ng-class=\"folder\">{{choice.name}}\n        </span>\n        <span class=\"label\" ng-if=\"choice.children.length === 0\"  ng-click=\"choiceClicked(choice)\">\n            <input type=\"checkbox\" ng-checked=\"choice.checked\">{{choice.name}}\n        </span>\n    </div>\n</li>"
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -25969,7 +26000,7 @@
 	;
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
