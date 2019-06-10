@@ -1,0 +1,9 @@
+.language-selector(uib-tooltip='{{"Language Selector" | translate}}')
+    select(
+        chosen,
+        width='"auto"',
+        ng-model='HeaderService.currentLanguage'
+        ng-change='HeaderService.changeCurrentLanguage()',
+        ng-options='k as v | translate for (k, v) in supportedLanguages'
+        disable_search_threshold=13
+    )

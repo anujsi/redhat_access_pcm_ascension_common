@@ -17,6 +17,7 @@ import rhaHeader from './directives/header'
 import rhaOnchange from './directives/onChange'
 import rhaTitletemplate from './directives/titleTemplate'
 import autoFocus from './directives/autoFocus'
+import languageSelect from './directives/languageSelect'
 
 // Services
 import AlertService from './services/alertService'
@@ -25,6 +26,9 @@ import HeaderService from './services/headerService'
 import StrataService from './services/strataService'
 import UdsService from './services/udsService'
 import ConfigService from './services/configService';
+
+// Constants
+import supportedLanguages from './constants/supportedLanguages';
 
 const app = angular.module('RedhatAccess.header', []);
 
@@ -45,6 +49,7 @@ app.directive('rhaHeader', rhaHeader);
 app.directive('rhaOnchange', rhaOnchange);
 app.directive('rhaTitletemplate', rhaTitletemplate);
 app.directive('autoFocus', autoFocus);
+app.directive('languageSelect', languageSelect);
 
 // Services
 app.service('AlertService', AlertService);
@@ -53,5 +58,8 @@ app.service('HeaderService', HeaderService);
 app.service('strataService', StrataService);
 app.service('udsService', UdsService);
 app.service('ConfigService', ConfigService);
+
+// constants
+app.constant('SUPPORTED_LANGUAGES', supportedLanguages);
 
 export default app.name;

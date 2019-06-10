@@ -1,7 +1,7 @@
 'use strict';
 
 export default class HeaderController {
-    constructor($scope, AlertService, HeaderService, COMMON_CONFIG, RHAUtils, $interval, $sce, securityService, $uibModal) {
+    constructor($scope, AlertService, CaseService, HeaderService, COMMON_CONFIG, RHAUtils, $interval, $sce, securityService, $uibModal) {
         'ngInject';
 
         /**
@@ -12,6 +12,7 @@ export default class HeaderController {
         $scope.AlertService = AlertService;
         $scope.HeaderService = HeaderService;
         $scope.securityService = securityService;
+        $scope.CaseService = CaseService;
         $scope.closeable = true;
         $scope.closeAlert = function (index) {
             AlertService.alerts.splice(index, 1);

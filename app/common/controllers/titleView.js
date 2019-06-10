@@ -8,6 +8,7 @@ export default class TitleViewCtrl {
         $scope.showTitle = COMMON_CONFIG.show;
         $scope.titlePrefix = COMMON_CONFIG.titlePrefix;
         $scope.CaseService = CaseService;
+        $scope.getClassPage = () => $scope.page;
         $scope.getPageTitle = function () {
             switch ($scope.page) {
                 case 'search':

@@ -1,0 +1,8 @@
+.title-template {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-header[page="caseView"] {
+    margin-bottom: -25px;
+}
