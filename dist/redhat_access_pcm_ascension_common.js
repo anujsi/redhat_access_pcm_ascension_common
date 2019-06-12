@@ -22416,7 +22416,7 @@
 	            currentLanguage = window.localStorage.getItem('current_language');
 	        } else {
 	            currentLanguage = currentLocale === 'en_US' ? 'en' : currentLocale;
-	            window.localStorage.setItem('current_language', currentLocale);
+	            window.localStorage.setItem('current_language', currentLanguage);
 	        }
 
 	        if (currentLanguage && currentLanguage !== gettextCatalog.currentLanguage) {
