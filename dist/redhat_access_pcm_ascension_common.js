@@ -23231,7 +23231,7 @@
 	                }
 	                return deferred.promise;
 	            },
-	            advancedSearch: function advancedSearch(query, order, offset, limit, format, caseFields) {
+	            advancedSearch: function advancedSearch(query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq) {
 	                var deferred = $q.defer(),
 	                    key = 'advancedSearch-' + Array.prototype.join.call(arguments, '-');
 
@@ -23247,7 +23247,7 @@
 	                        });
 	                        strataCache.put(key, response);
 	                        deferred.resolve(response);
-	                    }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields);
+	                    }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq);
 	                }
 
 	                return deferred.promise;
