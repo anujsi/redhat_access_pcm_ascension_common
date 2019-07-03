@@ -20933,7 +20933,7 @@
 	exports.default = {
 	    en: 'English',
 	    de: 'German',
-	    es: 'Spainsh',
+	    es: 'Spanish',
 	    fr: 'French',
 	    it: 'Italian',
 	    ja: 'Japanese',
