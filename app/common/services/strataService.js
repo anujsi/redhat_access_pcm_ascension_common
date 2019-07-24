@@ -710,24 +710,17 @@ export default class StrataService {
                     }
                     return deferred.promise;
                 },
-                advancedSearch: function (query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq) {
-                    const deferred = $q.defer(),
-                        key = `advancedSearch-${Array.prototype.join.call(arguments, '-')}`;
-
-                    if (strataCache.get(key)) {
-                        deferred.resolve(strataCache.get(key));
-                    } else {
-                        strata.cases.advancedSearch((response) => {
-                            angular.forEach(response['case'], (kase) => {
-                                const createdDate = RHAUtils.convertToTimezone(kase.created_date);
-                                kase.created_date = RHAUtils.formatDate(createdDate, 'MMM DD YYYY');
-                                const modifiedDate = RHAUtils.convertToTimezone(kase.last_modified_date);
-                                kase.last_modified_date = RHAUtils.formatDate(modifiedDate, 'MMM DD YYYY');
-                            });
-                            strataCache.put(key, response);
-                            deferred.resolve(response);
-                        }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq);
-                    }
+                advancedSearch: function (query, order, offset, limit, format, caseFields) {
+                    const deferred = $q.defer();
+                    strata.cases.advancedSearch((response) => {
+                        angular.forEach(response['case'], (kase) => {
+                            const createdDate = RHAUtils.convertToTimezone(kase.created_date);
+                            kase.created_date = RHAUtils.formatDate(createdDate, 'MMM DD YYYY');
+                            const modifiedDate = RHAUtils.convertToTimezone(kase.last_modified_date);
+                            kase.last_modified_date = RHAUtils.formatDate(modifiedDate, 'MMM DD YYYY');
+                        });
+                        deferred.resolve(response);
+                    }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields);
 
                     return deferred.promise;
                 },
