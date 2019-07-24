@@ -710,7 +710,7 @@ export default class StrataService {
                     }
                     return deferred.promise;
                 },
-                advancedSearch: function (query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq) {
+                advancedSearch: function (query, order, offset, limit, format, caseFields) {
                     const deferred = $q.defer();
                     strata.cases.advancedSearch((response) => {
                         angular.forEach(response['case'], (kase) => {
@@ -720,7 +720,7 @@ export default class StrataService {
                             kase.last_modified_date = RHAUtils.formatDate(modifiedDate, 'MMM DD YYYY');
                         });
                         deferred.resolve(response);
-                    }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq);
+                    }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields);
 
                     return deferred.promise;
                 },
