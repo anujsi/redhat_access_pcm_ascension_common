@@ -724,7 +724,9 @@ export default class StrataService {
                                 const modifiedDate = RHAUtils.convertToTimezone(kase.last_modified_date);
                                 kase.last_modified_date = RHAUtils.formatDate(modifiedDate, 'MMM DD YYYY');
                             });
-                            strataCache.put(key, response);
+                            if (response && response['case'] && response['case'].length < 100) {
+                                strataCache.put(key, response);
+                            }
                             deferred.resolve(response);
                         }, angular.bind(deferred, errorHandler), query, order, offset, limit, format, caseFields, caseStatus, caseOwner, caseGroup, accountNumber, searchString, sortField, fq);
                     }
