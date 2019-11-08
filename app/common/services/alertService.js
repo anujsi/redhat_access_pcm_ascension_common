@@ -40,14 +40,14 @@ export default class AlertService {
                 isHtml: isHtml
             };
             this.addAlert(alert);
-            $('body,html').animate({scrollTop: $('body').offset().top}, 100);
+            $('body,html').animate({ scrollTop: $('body').offset().top }, 100);
             //Angular adds a unique hash to each alert during data binding,
             //so the returned alert will be unique even if the
             //message and type are identical.
             return alert;
         };
         this.getErrors = function () {
-            var errors = $filter('filter')(this.alerts, {type: ALERT_TYPES.DANGER});
+            var errors = $filter('filter')(this.alerts, { type: ALERT_TYPES.DANGER });
             if (errors === null) {
                 errors = [];
             }
@@ -58,6 +58,10 @@ export default class AlertService {
                 var errorText = error.message;
                 if (error.xhr && error.xhr.responseText) {
                     errorText = errorText.concat(' Message: ' + error.xhr.responseText);
+                }
+                if (error.xhr && error.xhr.status === 500) {
+                    strata.logToSentry(errorText);
+                    errorText = 'Something went wrong.';
                 }
                 var existingMessage = $filter('filter')(this.alerts, {
                     type: ALERT_TYPES.DANGER,
