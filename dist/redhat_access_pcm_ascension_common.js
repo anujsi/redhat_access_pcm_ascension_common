@@ -22071,6 +22071,10 @@
 	            if (error.xhr && error.xhr.responseText) {
 	                errorText = errorText.concat(' Message: ' + error.xhr.responseText);
 	            }
+	            if (error.xhr && error.xhr.status === 500) {
+	                strata.logToSentry(errorText);
+	                errorText = 'Something went wrong.';
+	            }
 	            var existingMessage = $filter('filter')(this.alerts, {
 	                type: ALERT_TYPES.DANGER,
 	                message: errorText
