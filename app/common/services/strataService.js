@@ -578,12 +578,13 @@ export default class StrataService {
                         }
                         return deferred.promise;
                     },
-                    post: function (caseNumber, text, isPublic, isDraft) {
+                    post: function (caseNumber, text, isPublic, isDraft, contentType) {
                         var deferred = $q.defer();
                         strata.cases.comments.post(caseNumber, {
                             'text': text,
                             'draft': isDraft === true ? 'true' : 'false',
-                            'public': isPublic === true ? 'true' : 'false'
+                            'public': isPublic === true ? 'true' : 'false',
+                            'content_type': contentType ? contentType : 'plaintext'
                         }, function (response) {
                             strataCache.remove('comments' + caseNumber);
                             clearAllCaseSearch();
@@ -591,14 +592,15 @@ export default class StrataService {
                         }, angular.bind(deferred, errorHandler));
                         return deferred.promise;
                     },
-                    put: function (caseNumber, text, isDraft, isPublic, comment_id) {
+                    put: function (caseNumber, text, isDraft, isPublic, comment_id, contentType) {
                         var deferred = $q.defer();
                         strata.cases.comments.update(caseNumber, {
                             'text': text,
                             'draft': isDraft === true ? 'true' : 'false',
                             'public': isPublic === true ? 'true' : 'false',
                             'caseNumber': caseNumber,
-                            'id': comment_id
+                            'id': comment_id,
+                            'content_type': contentType ? contentType : 'plaintext'
                         }, comment_id, function (response) {
                             strataCache.remove('comments' + caseNumber);
                             clearAllCaseSearch();
